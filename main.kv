@@ -1,0 +1,326 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+ScreenManager:
+    id: screen_manager
+    Trends:
+    Table:
+    CovidChecker:
+    Centre:
+
+<Trends>:
+    name: 'trends'
+    MDScreen:
+        MDFloatLayout:
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDToolbar:
+                    title: "Covid Warriors"
+                    elevation: 10
+                    left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                ScrollView:
+                    MDBoxLayout:
+                        spacing: 40
+                        padding: 30
+                        id: layout
+                        orientation: 'vertical'
+                        adaptive_height: True
+                        MDLabel:
+                            text: 'Top 5 most affected Regions'
+                            font_name: 'Screens/Open_Sans/OpenSans-Bold.ttf'
+                            halign: "center"
+                            font_style: 'H4'
+                        AKBarChart:
+                            size_hint_y: None
+                            scale: 10000
+                            height: "300dp"
+                            id: chart
+                            labels: True
+                            anim: False
+                            label_size: 15
+                            bars_radius: 0
+
+                            # Customize the colors
+
+                            # bars colors
+                            bars_color: get_color_from_hex("#4CD6D7")
+
+                            # background color
+                            bg_color: get_color_from_hex("#363E41")
+
+                            # line color
+                            lines_color: get_color_from_hex("#363E41")
+
+                            x_values: list(range(5))
+                            y_values: [root.confirmednum(root.covid_j_data, 0), root.confirmednum(root.covid_j_data, 1), root.confirmednum(root.covid_j_data, 2), root.confirmednum(root.covid_j_data, 3), root.confirmednum(root.covid_j_data, 4)]
+                            x_labels: [root.country(root.covid_j_data, 0), root.country(root.covid_j_data, 1), root.country(root.covid_j_data, 2), root.country(root.covid_j_data, 3), root.country(root.covid_j_data, 4)]
+                        MDLabel:
+                            text: 'Top 5 most Recovering regions'
+                            font_name: 'Screens/Open_Sans/OpenSans-Bold.ttf'
+                            halign: "center"
+                            font_style: 'H4'
+                        AKBarChart:
+                            size_hint_y: None
+                            height: "300dp"
+                            id: chart
+                            labels: True
+                            anim: False
+                            label_size: 13
+                            bars_radius: 0
+                            text_color: get_color_from_hex("#FFFFFF")
+                            # Customize the colors
+
+                            # bars colors
+                            bars_color: get_color_from_hex("#4CD6D7")
+
+                            # background color
+                            bg_color: get_color_from_hex("#363E41")
+
+                            # line color
+                            lines_color: get_color_from_hex("#363E41")
+
+                            x_values: list(range(5))
+                            y_values: [root.recovered(root.covid_recovered, 0), root.recovered(root.covid_recovered, 1), root.recovered(root.covid_recovered, 2), root.recovered(root.covid_recovered, 3), root.recovered(root.covid_recovered, 4)]
+                            x_labels: [root.country(root.covid_recovered, 0), root.country(root.covid_recovered, 1), root.country(root.covid_recovered, 2), root.country(root.covid_recovered, 3), root.country(root.covid_recovered, 4)]
+                        MDLabel:
+                            text: 'Top 5 regions with most deaths'
+                            font_name: 'Screens/Open_Sans/OpenSans-Bold.ttf'
+                            halign: "center"
+                            font_style: 'H4'
+                        AKBarChart:
+                            size_hint_y: None
+                            height: "300dp"
+                            id: chart
+                            labels: True
+                            anim: False
+                            label_size: 13
+                            bars_radius: 0
+                            text_color: get_color_from_hex("#FFFFFF")
+                            # Customize the colors
+
+                            # bars colors
+                            bars_color: get_color_from_hex("#4CD6D7")
+
+                            # background color
+                            bg_color: get_color_from_hex("#363E41")
+
+                            # line color
+                            lines_color: get_color_from_hex("#363E41")
+
+                            x_values: list(range(5))
+                            y_values: [root.deaths(root.covid_deaths, 0), root.deaths(root.covid_deaths, 1), root.deaths(root.covid_deaths, 2), root.deaths(root.covid_deaths, 3), root.deaths(root.covid_deaths, 4)]
+                            x_labels: [root.country(root.covid_deaths, 0), root.country(root.covid_deaths, 1), root.country(root.covid_deaths, 2), root.country(root.covid_deaths, 3), root.country(root.covid_deaths, 4)]
+                        MDFillRoundFlatButton:
+                            text: 'Show the current Covid Trends'
+                            pos_hint: {'center_x': .5, 'center_y': 0.2}
+                            on_release: root.manager.current = 'table'
+                            ripple_color: 0, 210/255, 247/255
+                            font_name: 'Screens/Open_Sans/OpenSans-Bold.ttf'
+                            font_size: '16sp'
+                            theme_text_color: "Custom"
+                            md_bg_color: 1, 0, 0, 1
+        MDNavigationDrawer:
+            id: nav_drawer
+            orientation: "vertical"
+            padding: "8dp"
+            spacing: "8dp"
+
+            AnchorLayout:
+                anchor_x: "left"
+                size_hint_y: None
+                height: avatar.height
+
+                Image:
+                    id: avatar
+                    size_hint: None, None
+                    size: "56dp", "56dp"
+                    source: "download.jpeg"
+
+            MDLabel:
+                text: "KivyMD library"
+                font_style: "Button"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDLabel:
+                text: "kivydevelopment@gmail.com"
+                font_style: "Caption"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            ScrollView:
+
+                MDList:
+                    OneLineAvatarIconListItem:
+                        on_release: root.manager.current = "trends"
+                        text: 'Home'
+                    OneLineAvatarIconListItem:
+                        on_release: root.manager.current = "centre"
+                        text: 'Vaccination Centres'
+                    OneLineAvatarIconListItem:
+                        on_release: root.manager.current = "checker"
+                        text: 'Covid Probability'
+
+<Centre>:
+    name: 'centre'
+    MDScreen:
+        MDFloatLayout:
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDToolbar:
+                    title: "Covid Warriors"
+                    elevation: 10
+                    left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                ScrollView:
+                    MDBoxLayout:
+                        spacing: 30
+                        padding: 60
+                        id: layout
+                        orientation: 'vertical'
+                        adaptive_height: True
+                        MDLabel:
+                            text: 'To Find Suitable Vaccination Center Fill The details'
+                            font_name: 'Screens/Open_Sans/OpenSans-Bold.ttf'
+                            halign: "center"
+                            font_style: 'H4'
+                        MDTextField:
+                            size_hint_x: 0.8
+                            id: pincode
+                            hint_text: "Pincode"
+                            helper_text_mode: "on_focus"
+                            helper_text: 'Example: 109368'
+                            pos_hint: {"top": 1}
+                        MDTextField:
+                            size_hint_x: 0.8
+                            id: ac_lang
+                            hint_text: "Accept Language"
+                            helper_text_mode: "on_focus"
+                            helper_text: 'Example: en_US'
+                        MDTextField:
+                            size_hint_x: 0.8
+                            id: date
+                            hint_text: "Date"
+                            helper_text_mode: "on_focus"
+                            helper_text: 'Example: 31-01-2021'
+                        MDFillRoundFlatButton:
+                            text: 'Submit'
+                            on_release: root.on_click()
+        MDNavigationDrawer:
+            id: nav_drawer
+            orientation: "vertical"
+            padding: "8dp"
+            spacing: "8dp"
+
+            AnchorLayout:
+                anchor_x: "left"
+                size_hint_y: None
+                height: avatar.height
+
+                Image:
+                    id: avatar
+                    size_hint: None, None
+                    size: "56dp", "56dp"
+                    source: "download.jpeg"
+
+            MDLabel:
+                text: "KivyMD library"
+                font_style: "Button"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDLabel:
+                text: "kivydevelopment@gmail.com"
+                font_style: "Caption"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            ScrollView:
+
+                MDList:
+                    OneLineAvatarIconListItem:
+                        on_release: root.manager.current = "trends"
+                        text: 'Home'
+                    OneLineAvatarIconListItem:
+                        on_release: root.manager.current = "centre"
+                        text: 'Vaccination Centres'
+                    OneLineAvatarIconListItem:
+                        on_release: root.manager.current = "checker"
+                        text: 'Covid Probability'
+
+<CovidChecker>:
+    name: 'checker'
+    MDScreen:
+        MDFloatLayout:
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDToolbar:
+                    title: "Covid Warriors"
+                    elevation: 10
+                    left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                Widget:
+            MDLabel:
+                text: 'YOYO'
+        MDNavigationDrawer:
+            id: nav_drawer
+            orientation: "vertical"
+            padding: "8dp"
+            spacing: "8dp"
+
+            AnchorLayout:
+                anchor_x: "left"
+                size_hint_y: None
+                height: avatar.height
+
+                Image:
+                    id: avatar
+                    size_hint: None, None
+                    size: "56dp", "56dp"
+                    source: "download.jpeg"
+
+            MDLabel:
+                text: "KivyMD library"
+                font_style: "Button"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDLabel:
+                text: "kivydevelopment@gmail.com"
+                font_style: "Caption"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            ScrollView:
+
+                MDList:
+                    OneLineAvatarIconListItem:
+                        on_release: root.manager.current = "trends"
+                        text: 'Home'
+                    OneLineAvatarIconListItem:
+                        on_release: root.manager.current = "centre"
+                        text: 'Available Centres'
+                    OneLineAvatarIconListItem:
+                        on_release: root.manager.current = "checker"
+                        text: 'Covid Probability'
+<Table>:
+    name: 'table'
+    MDScreen:
+        MDFloatLayout:
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDToolbar:
+                    title: "Covid Warriors"
+                    elevation: 10
+                Widget:
+            MDFillRoundFlatButton:
+                text: 'Close'
+                on_release: root.manager.current = 'trends'
+                pos_hint: {'right': 0.9, 'top': 0.1}
+<ItemDrawer>:
+    theme_text_color: "Custom"
+    on_release: self.parent.set_color_item(self)
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: "Custom"
+        text_color: root.text_color
+
