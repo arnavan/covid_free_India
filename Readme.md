@@ -47,6 +47,6 @@ pip install sklearn
 pip install numpy
 ```
 
- **Made with ❤️ By Arnav Anand and Devam Lokhandwala**
+ **Made with ❤️  By Arnav Anand and Devam Lokhandwala**
 
 
