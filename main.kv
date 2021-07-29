@@ -256,9 +256,84 @@ ScreenManager:
                     title: "Covid Warriors"
                     elevation: 10
                     left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
-                Widget:
-            MDLabel:
-                text: 'YOYO'
+                ScrollView:
+                    MDBoxLayout:
+                        spacing: 70
+                        padding: 60
+                        id: layout
+                        orientation: 'vertical'
+                        adaptive_height: True
+                        MDLabel:
+                            text: 'Covid 19 positivity probability checker'
+                            font_name: 'Screens/Open_Sans/OpenSans-Bold.ttf'
+                            halign: "center"
+                            font_style: 'H4'
+                        MDTextField:
+                            size_hint_x: 0.8
+                            id: temp
+                            hint_text: "Body Temprature in fahrenheits"
+                            pos_hint: {"top": 1}
+                        MDTextField:
+                            size_hint_x: 0.8
+                            id: age
+                            hint_text: "Age"
+                        MDBoxLayout:
+                            spacing: 50
+                            orientation: 'horizontal'
+                            MDLabel:
+                                text: 'No Body Pain'
+                            Check:
+                                active: True
+                                id: body_pain_0
+                                pos_hint: {'center_x': .4, 'center_y': .5}
+                            MDLabel:
+                                text: 'Severe Body Pain'
+                            Check:
+                                id: body_pain_1
+                                pos_hint: {'center_x': .6, 'center_y': .5}
+                        MDLabel:
+                            font_style: 'H4'
+                            halign: 'center'
+                            text: 'Runny Nose'
+                        MDBoxLayout:
+                            spacing: 50
+                            orientation: 'horizontal'
+                            MDLabel:
+                                text: 'Yes'
+                            Check2:
+                                active: True
+                                id: yes_runny
+                                pos_hint: {'center_x': .4, 'center_y': .5}
+                            MDLabel:
+                                text: 'No'
+                            Check2:
+                                id: no_runny
+                                pos_hint: {'center_x': .6, 'center_y': .5}
+                        MDLabel:
+                            font_style: 'H4'
+                            halign: 'center'
+                            text: 'Breathing Difficulty'
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            MDLabel:
+                                text: 'No difficulty'
+                            Check3:
+                                active: True
+                                id: no_difficulty
+                                pos_hint: {'center_x': .4, 'center_y': .5}
+                            MDLabel:
+                                text: 'Little Difficulty'
+                            Check3:
+                                id: little_difficulty
+                                pos_hint: {'center_x': .6, 'center_y': .5}
+                            MDLabel:
+                                text: 'Severe Difficulty'
+                            Check3:
+                                id: severe_difficulty
+                                pos_hint: {'center_x': .6, 'center_y': .5}
+                        MDFillRoundFlatButton:
+                            text: 'Submit'
+                            on_release: root.on_click()
         MDNavigationDrawer:
             id: nav_drawer
             orientation: "vertical"
@@ -324,3 +399,12 @@ ScreenManager:
         theme_text_color: "Custom"
         text_color: root.text_color
 
+<Check@MDCheckbox>:
+    group: 'group'
+    size_hint: None, None
+<Check2@MDCheckbox>:
+    group: 'group2'
+    size_hint: None, None
+<Check3@MDCheckbox>:
+    group: 'group3'
+    size_hint: None, None
