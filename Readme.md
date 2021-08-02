@@ -38,3 +38,13 @@ pip install requests
 ```
 pip install akivymd
 ```
+
+```
+pip install sklearn
+```
+
+```
+pip install numpy
+```
+
+ **Made with ❤️ By Arnav Anand and Devam Lokhandwala**

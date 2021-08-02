@@ -11,7 +11,7 @@ class CovidWarriors(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.title = "Covid Warriors"
-
+        self.icon = "Image_20210729_2322321180663403414395583.png"
     def on_start(self):
         sm.current = 'trends'
         print(sm.current)
